@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrusel sin Bootstrap</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      font-family: Arial, sans-serif;
+    }
+
+    /* CONTENEDOR DEL CARRUSEL */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    /* SLIDES */
+    .carousel-slide {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* CADA IMAGEN */
+    .carousel-item {
+      min-width: 100%;
+      height: 400px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* TEXTO ENCIMA */
+    .carousel-text {
+      position: absolute;
+      bottom: 50%;
+      left: 37%;
+      padding: 10px 20px;
+      background: rgba(0,0,0,0.55);
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 5px;
+      pointer-events: none; /* Permite click en todo el slide */
+    }
+
+    /* FLECHAS */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: white;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 50%;
+    }
+
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    .arrow:hover {
+      background: rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="carousel">
+    <div class="carousel-slide" id="slides">
+
+      <!-- SLIDE 1 -->
+      <div class="carousel-item" onclick="location.href='https://pagina1.com'">
+        <img src="https://picsum.photos/900/400?1" alt="">
+        <div class="carousel-text">Ir a Página 1</div>
+      </div>
+
+      <!-- SLIDE 2 -->
+      <div class="carousel-item" onclick="location.href='https://pagina2.com'">
+        <img src="https://picsum.photos/900/400?2" alt="">
+        <div class="carousel-text">Ver Página 2</div>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="carousel-item" onclick="location.href='https://pagina3.com'">
+        <img src="https://picsum.photos/900/400?3" alt="">
+        <div class="carousel-text">Entrar a Página 3</div>
+      </div>
+
+    </div>
+
+    <div class="arrow left" onclick="moveSlide(-1)">❮</div>
+    <div class="arrow right" onclick="moveSlide(1)">❯</div>
+  </div>
+
+
+  <script>
+    let index = 0;
+
+    function moveSlide(direction) {
+      const slides = document.getElementById("slides");
+      const total = slides.children.length;
+
+      index += direction;
+
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    /* AUTO-SLIDE CADA 4 SEGUNDOS */
+    setInterval(() => moveSlide(1), 4000);
+  </script>
+
+</body>
+</html>
+    
